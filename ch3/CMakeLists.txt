@@ -11,8 +11,16 @@ elseif (UNIX)
 endif()
 
 find_package(Sophus REQUIRED)
+find_package(Pangolin REQUIRED)
 
-# Eigen
+include_directories( ${Pangolin_INCLUDE_DIRS} )
 include_directories(${DIRECTORY_PREFIX}include/eigen3)
+
 add_executable(useSophus useSophus.cpp)
 target_link_libraries(useSophus Sophus::Sophus)
+
+add_executable(trajectoryError trajectoryError.cpp)
+target_link_libraries(trajectoryError Sophus::Sophus)
+target_link_libraries(trajectoryError ${Pangolin_LIBRARIES})
+
+
